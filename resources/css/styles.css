@@ -1,32 +1,32 @@
 @font-face {
 	font-family:'P';
-	src: url('../fonts/P-Regular_gdi.eot');
-	src: url('../fonts/P-Regular_gdi.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/P-Regular_gdi.woff') format('woff'),
-		url('../fonts/P-Regular_gdi.ttf') format('truetype'),
-		url('../fonts/P-Regular_gdi.svg#P-Regular') format('svg');
+	src: url('../fonts/p-Regular_gdi.eot');
+	src: url('../fonts/p-Regular_gdi.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/p-Regular_gdi.woff') format('woff'),
+		url('../fonts/p-Regular_gdi.ttf') format('truetype'),
+		url('../fonts/p-Regular_gdi.svg#P-Regular') format('svg');
 	font-weight: 400;
 	font-style: normal;
 	font-stretch: normal;
 }
 @font-face {
 	font-family:'Akrobat';
-	src: url('../fonts/Akrobat-bold.eot');
-	src: url('../fonts/Akrobat-bold.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Akrobat-bold.woff') format('woff'),
-		url('../fonts/Akrobat-bold.ttf') format('truetype'),
-		url('../fonts/Akrobat-bold.svg#Akrobat-bold') format('svg');
+	src: url('../fonts/Akrobat-Bold.eot');
+	src: url('../fonts/Akrobat-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Akrobat-Bold.woff') format('woff'),
+		url('../fonts/Akrobat-Bold.ttf') format('truetype'),
+		url('../fonts/Akrobat-Bold.svg#Akrobat-Bold') format('svg');
 	font-weight: 700;
 	font-style: normal;
 	font-stretch: normal;
 }
 @font-face {
 	font-family:'Akrobat';
-	src: url('../fonts/Akrobat-black.eot');
-	src: url('../fonts/Akrobat-black.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Akrobat-black.woff') format('woff'),
-		url('../fonts/Akrobat-black.ttf') format('truetype'),
-		url('../fonts/Akrobat-black.svg#Akrobat-black') format('svg');
+	src: url('../fonts/Akrobat-Black.eot');
+	src: url('../fonts/Akrobat-Black.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Akrobat-Black.woff') format('woff'),
+		url('../fonts/Akrobat-Black.ttf') format('truetype'),
+		url('../fonts/Akrobat-Black.svg#Akrobat-Black') format('svg');
 	font-weight: 900;
 	font-style: normal;
 	font-stretch: normal;
