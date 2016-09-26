@@ -27,16 +27,19 @@ require([
 	'domReady',
 	'resize/vhUnits.view',
 	'images/images.view',
-	'preload/preload.view'
+	'preload/preload.view',
+	'full-text/full-text.view'
 	], function(
 		domReady,
 		vhUnits,
 		images,
-		preload
+		preload,
+		fullText
 	) {
 	domReady(function () {
 		vhUnits.init();
 		images.init();
 		preload.init();
+		fullText.init();
 	});
 });
