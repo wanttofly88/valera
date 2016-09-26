@@ -201,25 +201,25 @@ header .side-nav {
 	position: absolute;
 	right: 0;
 }
-nav {
+.desktop-nav {
 	position: absolute;
 	right: 20px;
 	bottom: 26px;
 }
-nav .item {
+.desktop-nav .item {
 	margin-bottom: 18px;
 }
-nav .link-wrap {
+.desktop-nav .link-wrap {
 	position: relative;
 	display: inline-block;
 	margin-bottom: 0px;
 	overflow: hidden;
 }
-nav .link-wrap .sw {
+.desktop-nav .link-wrap .sw {
 	position: relative;
 	display: inline-block;
 }
-nav .link-wrap:before {
+.desktop-nav .link-wrap:before {
 	content: "";
 	position: absolute;
 	left: -1px;
@@ -229,7 +229,7 @@ nav .link-wrap:before {
 	transition: all 0.07s;
 	background: #040406;
 }
-nav .link-wrap .sw:after {
+.desktop-nav .link-wrap .sw:after {
 	content: "";
 	position: absolute;
 	left: -4px;
@@ -239,21 +239,21 @@ nav .link-wrap .sw:after {
 	background: #040406;
 	z-index: -1;
 }
-nav .link-wrap:before {
+.desktop-nav .link-wrap:before {
 	transition: all 0.07s;
 }
-nav .link-wrap:hover:before {
+.desktop-nav .link-wrap:hover:before {
 	transition: all 0.07s;
 	background: #c1b700;
 }
-nav .link-wrap .sw:after {
+.desktop-nav .link-wrap .sw:after {
 	transition: all 0.07s;
 }
-nav .link-wrap:hover .sw:after {
+.desktop-nav .link-wrap:hover .sw:after {
 	transition: all 0.07s ease 0.07s;
 	opacity: 0;
 }
-nav .link {
+.desktop-nav .link {
 	position: relative;
 	display: inline-block;
 	white-space: nowrap;
@@ -300,24 +300,50 @@ nav .link {
 	height: 100%;
 }
 .stage .name .tx {
-	fill: #040406;
 	font-size: 120px;
 	font-family: "KingBasil";
 }
+.csstransitions .stage path {
+	stroke: #040406;
+	stroke-width: 26px;
+	fill: none;
+	stroke-linecap:  round;
+} 
 .stage .name .svg-top {
 	position: absolute;
 	top: -25px;
 	left: -5px;
-	width: 346px;
-	height: 137px;
+	width: 230px;
+	height: 90px;
 }
 .stage .name .svg-bot {
 	position: absolute;
-	top: 78px;
-	left: 3px;
-	width: 422px;
-	height: 143px;
+	top: 48px;
+	left: -10px;
+	width: 290px;
+	height: 95px;
 }
+@media screen and (min-width: 1200px) {
+	.stage .name {
+		top: 43%;
+		left: -5px;
+	}
+	.stage .name .svg-top {
+		top: -25px;
+		left: -5px;
+		width: 346px;
+		height: 137px;
+	}
+	.stage .name .svg-bot {
+		top: 78px;
+		left: -5px;
+		width: 422px;
+		height: 143px;
+	}
+}
+
+
+
 .stage .text {
 	position: absolute;
 	left: -52px;
@@ -357,18 +383,7 @@ nav .link {
 	opacity: 0.6;
 	filter: blur(3.5px);
 }
-.page-wrapper .bot-photo {
-	opacity: 0;
-	transition:  all 0.3s;
-}
-.page-wrapper .top-photo {
-	transition:  all 0.3s;
-}
-.page-wrapper:hover .top-photo {
-}
-.page-wrapper:hover .bot-photo {
 
-}
 
 section {
 	position: relative;
@@ -425,6 +440,7 @@ p {
 	font-size: 14px;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	cursor: pointer;
 }
 .scroll-button:before {
 	content: "";
@@ -471,26 +487,29 @@ p {
 }
 
 
+
 .csstransitions .page-wrapper {
 	will-change: opacity;
 	opacity: 0;
 }
 .csstransitions .page-wrapper.load-complete-once {
 	will-change: auto;
-	transition:  all 0.2s linear;
+	transition:  all 0.4s linear;
 	opacity: 1;
 }
-.csstransitions nav {
+.csstransitions .desktop-nav {
 	will-change: transform;
 	opacity: 0;
 	transform: translateX(-3px);
 }
-.csstransitions .load-complete-once nav {
+.csstransitions .load-complete-once .desktop-nav {
 	will-change: auto;
 	transition:  all 0.6s ease 1.1s;
 	transform: translateX(0px);
 	opacity: 1;
 }
+
+
 .csstransitions .stage .photo {
 	will-change: transform;
 	transform: translateX(5px);
@@ -507,7 +526,7 @@ p {
 .csstransitions .load-complete-once .stage .text {
 	will-change: auto;
 	opacity: 1;
-	transition:  all 1.4s ease 0.2s;
+	transition:  opacity 1.4s ease 0.2s;
 }
 .csstransitions .stage .bg-blured {
 	will-change: transform;
@@ -520,12 +539,21 @@ p {
 	transform: translateX(0px);
 	opacity: 1;
 }
-.csstransitions .stage path {
-	stroke: red;
-	stroke-width: 26px;
-	fill: none;
-	stroke-linecap:  round;
-} 
+
+.csstransitions .stage .svg-top {
+	transition: opacity 0s linear 0.3s;
+	opacity: 0;
+}
+.csstransitions .load-complete-once .stage .svg-top {
+	opacity: 1;
+}
+.csstransitions .stage .svg-bot {
+	transition: opacity 0s linear 0.8s;
+	opacity: 0;
+}
+.csstransitions .load-complete-once .stage .svg-bot {
+	opacity: 1;
+}
 .csstransitions .stage #ms1 {
 	stroke-dasharray: 1400;
 	stroke-dashoffset: 1400;
@@ -542,6 +570,8 @@ p {
 	transition: all 0.4s linear 0.8s;
 	stroke-dashoffset: 0;
 }
+
+
 
 .csstransitions .home .bg-arrow {
 	will-change: transform;
