@@ -26,18 +26,21 @@ require.config({
 require([
 	'domReady',
 	'resize/vhUnits.view',
+	'resize/main-minHeight.view',
 	'images/images.view',
 	'preload/preload.view',
 	'full-text/full-text.view'
 	], function(
 		domReady,
 		vhUnits,
+		mainMinHeight,
 		images,
 		preload,
 		fullText
 	) {
 	domReady(function () {
 		vhUnits.init();
+		mainMinHeight.init();
 		images.init();
 		preload.init();
 		fullText.init();

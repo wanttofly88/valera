@@ -10,7 +10,7 @@ define(['dispatcher', 'preload/preload.store', 'images/images.store', 'video/vid
 	var complete = false;
 
 	var startTime;
-	var minTimeout = 0;
+	var minTimeout = 500;
 
 	var idName = 'preload-image-id-';
 	var idNum  = 1;
