@@ -576,7 +576,7 @@ slide-scroll {
 slide-scroll .overflow {
 	width: 100%;
 	-webkit-overflow-scrolling: touch;
-	overflow: auto;
+/*	overflow: auto;*/
 }
 
 .home {
