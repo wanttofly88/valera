@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="resources-path" content="resources/">
 	<title>Valerka</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"/>
-	<meta name="resources-path" content="resources">
 	<link rel="stylesheet" href="resources/css/styles.css">
 	<script src="resources/js/libs/modernizr.js"></script>
+	<script src="resources/js/libs/webcomponents-lite.js"></script>
 	<script data-main="resources/js/app" src="resources/js/require.js"></script>
 </head>
 <body>
-	<div class="page-wrapper">
+
+	<preload-component class="page-wrapper">
 		<header>
 			<div class="wrapper">
-				<div class="side-nav vh-height show1000">
+				<full-height class="side-nav show1000">
 					<nav class="desktop-nav">
 						<div class="item">
 							<span class="link-wrap active">
@@ -40,13 +42,13 @@
 							<div>my contacts</div>
 						</div>
 					</nav>
-				</div>
+				</full-height>
 			</div>
 		</header>
-
-		<div class="stage vh-height">
+		
+		<full-height class="stage">
 			<div class="wrapper">
-				<div class="text js-full-text">ARCHITECT</div>
+				<full-text>ARCHITECT</full-text>
 				<div class="name">
 					<div class="svg-top">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" viewBox="0 0 346 137">
@@ -64,37 +66,62 @@
 							</clipPath>
 						</svg>
 					</div>
-					<!-- Valera</br>Tokarev -->
 				</div>
-				<div class="replaceable" data-id="stage-replaceable">
-					<div class="bg-blured">The feature</br>competition</br>in dubai</div>
-					<div class="photo">
-						<img class="top-photo wait-load-image adaptive-image"
-						 data-desktop-src="resources/images/photo.png" src="" alt="">
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<main class="content replaceable" data-id="main-replaceable">
-			<section class="home vh-height">
-				<div class="bg">
-					<div class="wrapper">
-						<div class="bg-arrow"></div>
+				<div class="replaceable" data-id="stage-replaceable">
+					<div class="photo">
+						<img is="img-preload" class="top-photo"
+							data-desktop-src="resources/images/photo.png"
+							src=""
+							alt=""></img>
 					</div>
-				</div>
-				<div class="wrapper">
-					<div class="text">
-						<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
-						<a href="#" class="button">Read more</a>
-					</div>
+
+					<div class="bg-arrow"></div>
+
 					<div class="scroll-button-wrapper">
 						<div class="scroll-button">scroll</div>
 					</div>
-					
 				</div>
-			</section>
+			</div>
+		</full-height>
+
+		<main class="replaceable" data-id="main-replaceable">
+			<slide-scroll>
+				<full-height class="overflow">
+					<section class="home">
+						<div class="bg"></div>
+						<full-height class="wrapper">
+							<div class="text">
+								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
+								<div class="btn-wrap">
+									<a href="#" class="button">Read more</a>
+								</div>
+							</div>
+						</full-height>
+					</section>
+					<section class="about">
+						<div class="bg">
+							<div class="wrapper">
+								<div class="bg-arrow"></div>
+							</div>
+						</div>
+						<full-height class="wrapper">
+							<div class="text">
+								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
+								<div class="btn-wrap">
+									<a href="#" class="button">Read more</a>
+								</div>
+							</div>
+							<div class="scroll-button-wrapper">
+								<div class="scroll-button">scroll</div>
+							</div>
+							
+						</full-height>
+					</section>
+				</full-height>
+			</slide-scroll>
 		</main>
-	</div>
+
+	</preload-component>
 </body>
 </html>
