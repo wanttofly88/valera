@@ -104,40 +104,81 @@ define(function() {
 		}
 	}
 
-	var ajax = {
-		x: function() {
-			try {
-				return new ActiveXObject('Msxml2.XMLHTTP')
-			} catch (e1) {
-				try {
-					return new ActiveXObject('Microsoft.XMLHTTP')
-				} catch (e2) {
-					return new XMLHttpRequest()
-				}
+	var http = function(url) {
+		var core = {
+			ajax: function(method, url, args, type) {
+				var promise = new Promise(function(resolve, reject) {
+					var client = new XMLHttpRequest();
+					var query;
+					var json;
+					var argcount;
+					var key;
+
+					client.onload = function () {
+						if (this.status >= 200 && this.status < 300) {
+							resolve(this.response);
+						} else {
+							reject(this.statusText);
+						}
+					}
+					client.onerror = function () {
+						reject(this.statusText);
+					}
+
+					if (!args) {
+						client.open(method, url);
+						client.send();
+					} else {
+						if (!type || type === 'urlencoded') {
+							query = '';
+							argcount = 0;
+							for (key in args) {
+								if (args.hasOwnProperty(key)) {
+									if (argcount++) {
+										query += '&';
+									}
+									query += encodeURIComponent(key) + '=' + encodeURIComponent(args[key]);
+								}
+							}
+						} else if (type === 'json') {
+							json = JSON.stringify(args);
+						}
+
+						if ((method === 'GET' || method === 'DELETE')) {
+							client.open(method, url + '?' + query);
+							client.send(args);
+						} else {
+							client.open(method, url);
+
+							if (type === 'json') {
+								client.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+								client.send(json);
+							} else if (type === 'urlencoded') {
+								client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+								client.send(query);
+							} else {
+								client.send(args);
+							}
+						}
+					}
+				});
+				return promise;
 			}
-		},
-		send: function(url, callback, method, data, sync, type) {
-			var x = ajax.x();
-			x.open(method, url, sync);
-			x.onreadystatechange = function() {
-				if (x.readyState == 4) {
-					callback(x.responseText)
-				}
+		}
+
+		return {
+			'get': function(args, type) {
+				return core.ajax('GET', url, args, type);
+			},
+			'post': function(args, type) {
+				return core.ajax('POST', url, args, type);
+			},
+			'put': function(args, type) {
+				return core.ajax('PUT', url, args, type);
+			},
+			'delete': function(args, type) {
+				return core.ajax('DELETE', url, args, type);
 			}
-			if ((typeof(type) !== 'undefined') && (type === 'json')) {
-				x.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-			}
-			x.send(data);
-		},
-		get: function(url, data, callback, sync) {
-			var query = [];
-			for (var key in data) {
-				query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
-			}
-			ajax.send(url + '?' + query.join('&'), callback, 'GET', null, sync)
-		},
-		post: function(url, data, callback, sync, type) {
-			ajax.send(url, callback, 'POST', data, sync, type)
 		}
 	}
 
@@ -163,8 +204,6 @@ define(function() {
 
 			key = decodeURIComponent(key);
 
-			// missing `=` should be `null`:
-			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
 			val = val === undefined ? null : decodeURIComponent(val);
 
 			if (!ret.hasOwnProperty(key)) {
@@ -179,13 +218,35 @@ define(function() {
 		}, {});
 	}
 
+	var EventEmitter = function() {
+		this._handlers = [];
+
+		this.dispatch = function(event) {
+			for (var i = this._handlers.length - 1; i >= 0; i--) {
+				this._handlers[i](event);
+			}
+		}
+
+		this.subscribe = function(handler) {
+			this._handlers.push(handler);
+		}
+
+		this.unsubscribe = function(handler) {
+			for (var i = 0; i <= this._handlers.length - 1; i++) {
+				if (this._handlers[i] == handler) {
+					this._handlers.splice(i--, 1);
+				}
+			}
+		}
+	}
 
 	return {
 		offset: offset,
 		Tween: Tween,
 		getRequestAnimationFrame: getRequestAnimationFrame,
-		ajax: ajax,
-		queryParse: queryParse
+		http: http,
+		queryParse: queryParse,
+		EventEmitter: EventEmitter
 	}
 
 });

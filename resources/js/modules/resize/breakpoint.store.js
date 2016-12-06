@@ -1,7 +1,8 @@
-define(['dispatcher'], function(dispatcher) {
+define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	var initialized = false;
+	var eventEmitter;
 
-	var breakPoints = [
+	var breakpointsData = [
 		{
 			size: 0,
 			name: 'mobile'
@@ -14,7 +15,7 @@ define(['dispatcher'], function(dispatcher) {
 		}
 	];
 
-	var currentBreakPoint = false;
+	var breakpoint = false;
 
 	var size = {
 		width: 0,
@@ -22,36 +23,22 @@ define(['dispatcher'], function(dispatcher) {
 	}
 
 	var _windowSize = function() {
-		var width = 0, height = 0;
-		if( typeof( window.innerWidth ) === 'number' ) {
-			width = window.innerWidth;
-			height = window.innerHeight;
-		} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-			width = document.documentElement.clientWidth;
-			height = document.documentElement.clientHeight;
-		} else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-			width = document.body.clientWidth;
-			height = document.body.clientHeight;
-		}
 		return {
-			height: height,
-			width: width
+			height: window.innerHeight,
+			width:  window.innerWidth
 		}
 	}
 
-	var _onresize = function() {
+	var _onResize = function() {
 		size = _windowSize();
 
 		var _getBreakPoint = function() {
-			for (var i = breakPoints.length - 1; i >= 0; i--) {
-				if (size.width >= breakPoints[i].size) {
-					if (currentBreakPoint === breakPoints[i]) return;
-					currentBreakPoint = breakPoints[i];
+			for (var i = breakpointsData.length - 1; i >= 0; i--) {
+				if (size.width >= breakpointsData[i].size) {
+					if (breakpoint === breakpointsData[i]) return;
+					breakpoint = breakpointsData[i];
 					
-					eventEmitter.dispatch({
-						type: 'change'
-					});
-
+					eventEmitter.dispatch();
 					return;
 				}
 			}
@@ -61,43 +48,17 @@ define(['dispatcher'], function(dispatcher) {
 	}
 
 	var _init = function() {
+		eventEmitter = new utils.EventEmitter();
+
 		size = _windowSize();
-		_onresize();
-		window.addEventListener('resize', _onresize, false);
-		window.addEventListener('orientationchange', _onresize, false);
-		window.addEventListener('load', _onresize, false);
+		_onResize();
+		window.addEventListener('resize', _onResize, false);
+		window.addEventListener('orientationchange', _onResize, false);
+		window.addEventListener('load', _onResize, false);
 	}
 
-	var eventEmitter = function() {
-		var _handlers = [];
-
-		var dispatch = function(event) {
-			for (var i = _handlers.length - 1; i >= 0; i--) {
-				_handlers[i](event);
-			}
-		}
-		var subscribe = function(handler) {
-			_handlers.push(handler);
-		}
-		var unsubscribe = function(handler) {
-			for (var i = 0; i <= _handlers.length - 1; i++) {
-				if (_handlers[i] == handler) {
-					_handlers.splice(i--, 1);
-				}
-			}
-		}
-
-		return {
-			dispatch: dispatch,
-			subscribe: subscribe,
-			unsubscribe: unsubscribe
-		}
-	}();
-
 	var getData = function() {
-		return {
-			breakpoint: currentBreakPoint
-		}
+		return breakpoint;
 	}
 
 	if (!initialized) {
