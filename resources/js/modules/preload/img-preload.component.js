@@ -28,7 +28,6 @@ define(['dispatcher', 'resize/breakpoint.store'], function(dispatcher, breakpoin
 		var createdCallback = function() {
 			_handleBreakpoints = _handleBreakpoints.bind(this);
 			_handleLoadOnce = _handleLoadOnce.bind(this);
-
 			this.breakpoint = null;
 			this.loadedOnce = false;
 		}

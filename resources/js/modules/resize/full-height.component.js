@@ -31,6 +31,6 @@ define(['dispatcher'], function(dispatcher) {
 
 	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('full-height', {
-		prototype: elementProto
+		prototype: elementProto,
 	});
 });
