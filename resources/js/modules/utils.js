@@ -222,21 +222,20 @@ define(function() {
 		this._handlers = [];
 
 		this.dispatch = function(event) {
-			for (var i = this._handlers.length - 1; i >= 0; i--) {
-				this._handlers[i](event);
-			}
+			this._handlers.forEach(function(handler) {
+				handler(event);
+			});
 		}
-
 		this.subscribe = function(handler) {
-			this._handlers.push(handler);
-		}
-
-		this.unsubscribe = function(handler) {
-			for (var i = 0; i <= this._handlers.length - 1; i++) {
-				if (this._handlers[i] == handler) {
-					this._handlers.splice(i--, 1);
-				}
+			if (this._handlers.indexOf(handler) === -1 
+				&& typeof handler === 'function') {
+				this._handlers.push(handler);
 			}
+		}
+		this.unsubscribe = function(handler) {
+			this._handlers = _handlers.filter(function(h) {
+				h !== handler;
+			});
 		}
 	}
 

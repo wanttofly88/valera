@@ -1,6 +1,7 @@
 define(['dispatcher', 'utils'], function(dispatcher, utils) {
-	var initialized = false;
-	var eventEmitter;
+	'use strict';
+
+	var eventEmitter = new utils.EventEmitter();
 
 	var breakpointsData = [
 		{
@@ -48,7 +49,6 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 	}
 
 	var _init = function() {
-		eventEmitter = new utils.EventEmitter();
 
 		size = _windowSize();
 		_onResize();
@@ -61,10 +61,7 @@ define(['dispatcher', 'utils'], function(dispatcher, utils) {
 		return breakpoint;
 	}
 
-	if (!initialized) {
-		initialized = true;
-		_init();
-	}
+	_init();
 
 	return {
 		eventEmitter: eventEmitter,

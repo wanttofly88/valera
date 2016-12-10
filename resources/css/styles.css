@@ -297,9 +297,10 @@ full-height {
 .stage {
 	position: fixed;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	left: 0;
 	top: 0;
+	overflow: hidden;
 }
 .stage .wrapper {
 	height: 100%;
@@ -572,23 +573,27 @@ p {
 slide-scroll {
 	position: relative;
 	display: block;
+	height: 100vh;
+	overflow: hidden;
 }
-slide-scroll .overflow {
-	width: 100%;
+slide-scroll .slide-scroll-wrapper {
+	transition: all 0s;
+}
+/*slide-scroll .slide-scroll-wrapper {
 	-webkit-overflow-scrolling: touch;
-/*	overflow: auto;*/
 }
-
+*/
+section .wrapper {
+	height: 100%;
+	box-sizing: border-box;
+}
 .home {
 	z-index: 50;
 	position: relative;
 }
-.home .wrapper {
-	height: 100%;
-}
 .home .text {
 	position: absolute;
-	bottom: calc(70px + 7%);
+	bottom: 80px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -602,7 +607,6 @@ slide-scroll .overflow {
 @media screen and (min-width: 640px) {
 	.home .text {
 		right: auto;
-		bottom: calc(80px + 7%);
 	}
 	.home .text .btn-wrap {
 		text-align: left;
@@ -610,9 +614,41 @@ slide-scroll .overflow {
 }
 @media screen and (min-width: 1200px) {
 	.home .text {
-		bottom: calc(30px + 7%);
+		bottom: 110px;
 	}
 }
+
+.about {
+	z-index: 50;
+	position: relative;
+}
+.about .text {
+	position: absolute;
+	bottom: 80px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 100%;
+	max-width: 330px;
+}
+.about .text .btn-wrap {
+	text-align: center;
+}
+@media screen and (min-width: 640px) {
+	.about .text {
+		right: auto;
+	}
+	.about .text .btn-wrap {
+		text-align: left;
+	}
+}
+@media screen and (min-width: 1200px) {
+	.about .text {
+		bottom: 110px;
+	}
+}
+
+
 
 .wrapper {
 	outline: 1px solid;
@@ -667,7 +703,6 @@ slide-scroll .overflow {
 
 .csstransitions preload-component {
 	transition:  all 0.4s;
-	transform: translateZ(0px);
 	opacity: 0;
 }
 .csstransitions preload-component.load-complete-once {
