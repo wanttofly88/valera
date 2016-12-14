@@ -62,7 +62,7 @@ html {
 body {
 	font-size: 14px;
 	color: #ffffff;
-	background: #b9d4e8;
+/*	background: #b9d4e8;*/
 	height: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -110,7 +110,6 @@ preload-component {
 	position: relative;
 	overflow: hidden;
 	min-width: 320px;
-	background: #b9d4e8;
 }
 .show320 {
 	display: block !important;
@@ -220,6 +219,9 @@ header .side-nav {
 	margin-bottom: 0px;
 	overflow: hidden;
 }
+.desktop-nav .link-wrap.active {
+	cursor: default;
+}
 .desktop-nav .link-wrap .sw {
 	position: relative;
 	display: inline-block;
@@ -255,9 +257,12 @@ header .side-nav {
 .desktop-nav .link-wrap .sw:after {
 	transition: all 0.07s;
 }
-.desktop-nav .link-wrap:hover .sw:after,
-.desktop-nav .link-wrap.active .sw:after {
+.desktop-nav .link-wrap:hover .sw:after {
 	transition: all 0.07s ease 0.07s;
+	opacity: 0;
+}
+.desktop-nav .link-wrap.active .sw:after {
+	transition: all 0.07s ease 0s;
 	opacity: 0;
 }
 .desktop-nav .link {
@@ -291,6 +296,15 @@ header .side-nav {
 full-height {
 	display: block;
 	height: 100vh;
+}
+
+.full-bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 0;
 }
 
 
@@ -651,7 +665,7 @@ section .wrapper {
 
 
 .wrapper {
-	outline: 1px solid;
+/*	outline: 1px solid;*/
 }
 
 .project-slider {

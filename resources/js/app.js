@@ -28,5 +28,7 @@ require([
 	'preload/preload.component',
 	'preload/img-preload.component',
 	'full-text/full-text.component',
-	'slide-scroll/slide-scroll.component'
+	'slide-scroll/slide-scroll.component',
+	'full-bg/full-bg.component',
+	'main-nav/main-nav.component'
 ]);
