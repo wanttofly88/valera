@@ -7,9 +7,6 @@ define([
 ) {
 	"use strict";
 
-	var idName = 'slide-scroll-';
-	var idNum  = 1;
-
 	var elementProto = function() {
 		var translate = function(element, position, speed) {
 			element.style.transitionDuration = speed + 'ms';
@@ -19,6 +16,11 @@ define([
 		var resizeHandler = function() {
 			var wh = window.innerHeight;
 			var storeData = store.getData().items[this._id];
+
+			if (!storeData) {
+				console.warn('store data is missing');
+				return;
+			}
 
 			if (this.clientHeight !== wh) {
 				this.style.height = wh + 'px';
@@ -55,7 +57,7 @@ define([
 			this._touchCancelHandler = touchCancelHandler.bind(this);
 		}
 		var attachedCallback = function() {
-			this._id = this.getAttribute('data-id') || (idName + (idNum++));
+			this._id = this.getAttribute('data-id');
 
 			this._slideScrollComponent = document.getElementsByTagName('slide-scroll')[0];
 			this._wrapper = this.getElementsByClassName('full-bg-wrapper')[0];

@@ -16,27 +16,27 @@
 		<header>
 			<div class="wrapper">
 				<full-height class="side-nav show1000">
-					<nav class="desktop-nav">
+					<nav is="main-nav" class="desktop-nav" data-id="main-slide-scroll">
 						<div class="item">
-							<span class="link-wrap active">
+							<a href="#about" class="link-wrap active">
 								<span class="link">About <span class="sw">me</span></span>
-							</span>
+							</a>
 							<div>all about me</div>
 						</div>
 						<div class="item">
-							<a href="interior.html" class="link-wrap">
+							<a href="#interior" class="link-wrap">
 								<span class="link">Interior <span class="sw">Design</span></span>
 							</a>
 							<div>all about interior design</div>
 						</div>
 						<div class="item">
-							<a href="concept.html" class="link-wrap">
+							<a href="#concept" class="link-wrap">
 								<span class="link">Concept <span class="sw">Design</span></span>
 							</a>
 							<div>all about concept design</div>
 						</div>
 						<div class="item">
-							<a href="contacts.html" class="link-wrap">
+							<a href="#contacts" class="link-wrap">
 								<span class="link">Contacts</span>
 							</a>
 							<div>my contacts</div>
@@ -50,7 +50,8 @@
 			<div class="full-bg-wrapper">
 				<full-height class="bg-item" style="background: #b9d4e8"></full-height>
 				<full-height class="bg-item" style="background: #bbe7c2"></full-height>
-				<full-height class="bg-item" style="background: #ffa8c7"></full-height>
+				<full-height class="bg-item" style="background: #cdbee8"></full-height>
+				<full-height class="bg-item" style="background: #c3dce0"></full-height>
 			</div>
 		</full-bg>
 		
@@ -97,7 +98,7 @@
 			<slide-scroll data-id="main-slide-scroll">
 				<div class="slide-scroll-wrapper">
 
-					<section class="home js-slide">
+					<section class="home js-slide" id="#about">
 						<div class="bg"></div>
 						<full-height class="wrapper">
 							<div class="text">
@@ -109,7 +110,7 @@
 						</full-height>
 					</section>
 
-					<section class="about js-slide">
+					<section class="about js-slide" id="#interior">
 						<div class="bg">
 							<div class="wrapper">
 								<div class="bg-arrow"></div>
@@ -125,7 +126,23 @@
 						</full-height>
 					</section>
 
-					<section class="about js-slide">
+					<section class="about js-slide" id="#concept">
+						<div class="bg">
+							<div class="wrapper">
+								<div class="bg-arrow"></div>
+							</div>
+						</div>
+						<full-height class="wrapper">
+							<div class="text">
+								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
+								<div class="btn-wrap">
+									<a href="#" class="button">Read more</a>
+								</div>
+							</div>
+						</full-height>
+					</section>
+
+					<section class="about js-slide" id="#contacts">
 						<div class="bg">
 							<div class="wrapper">
 								<div class="bg-arrow"></div>

@@ -10,19 +10,52 @@ define([
 	var idName = 'slide-scroll-';
 	var idNum  = 1;
 
-	var translate = function(element, position, speed) {
-		element.style.transitionDuration = speed + 'ms';
-		element.style.transform = 'translateY(' + position + 'px) translateZ(0)';
-	}
-
 	var elementProto = function() {
-		var _mouseMoveHandler = function() {
-
+		var translate = function(element, position, speed) {
+			element.style.transitionDuration = speed + 'ms';
+			element.style.transform = 'translateY(' + position + 'px) translateZ(0)';
 		}
 
 		var KeyboardHandler = function(component) {
 			this.component = component;
-			// prevent when zooming
+
+			this.onKeyDown = function(e) {
+				var keyCode = e.which;
+
+				if (keyCode === 17) {
+					this.component._ctrl = true;
+				}
+
+				if (this.component._isScrolling) return;
+
+				if (keyCode === 38 || keyCode === 33) {
+					dispatcher.dispatch({
+						type: 'slide-scroll',
+						id: this.component._id,
+						direction: 'top'
+					});
+				} else if (keyCode === 40 || keyCode === 34) {
+					dispatcher.dispatch({
+						type: 'slide-scroll',
+						id: this.component._id,
+						direction: 'bottom'
+					});
+				}
+			}.bind(this);
+
+			this.onKeyUp = function() {
+				this.component._ctrl = false;
+			}.bind(this);
+
+			this.set = function() {
+				document.addEventListener('keydown', this.onKeyDown);
+				document.addEventListener('keyup', this.onKeyUp);
+			}
+
+			this.remove = function() {
+				document.removeEventListener('keydown', this.onKeyDown);
+				document.removeEventListener('keyup', this.onKeyUp);
+			}
 		}
 
 		var WheelHandler = function(component) {
@@ -37,6 +70,7 @@ define([
 				var summ1, summ2;
 
 				if (this.component._isScrolling) return;
+				if (this.component._ctrl) return;
 
 				if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDelta) || Math.abs(e.deltaX ) > Math.abs(e.deltaY)) return;
 
@@ -86,7 +120,6 @@ define([
 			this._horizontal = undefined;
 			this._edge = false;
 
-
 			this.ontouchstart = function(e) {
 				var touches = e.touches[0];
 				var storeData = store.getData().items[this.component._id];
@@ -110,6 +143,7 @@ define([
 			this.ontouchmove = function(e) {
 				var touches;
 				var move = 0;
+				var touchMoveEvent;
 
 				if (e.touches.length > 1 || e.scale && e.scale !== 1) return;
 				touches = event.touches[0];
@@ -137,9 +171,15 @@ define([
 					this._edge = false;
 				}
 
-				if (this._edge) {
-					move = move / 4;
-				}
+				// if (this._edge) {
+				// 	move = move / 4;
+				// }
+				if (this._edge) return;
+
+				touchMoveEvent = new CustomEvent('touchshift', {
+					'detail': move
+				})
+				this.component.dispatchEvent(touchMoveEvent);
 
 				e.preventDefault();
 				translate(this.component._wrapper, -this.index*this.wh + move , 0);
@@ -150,6 +190,7 @@ define([
 				var duration = +new Date - this._start.time;
 				var check = parseInt(duration) < 250 && Math.abs(this._delta.y) > 20 || Math.abs(this._delta.y) > 100;
 				var returnSpeed = 250;
+				var touchEndEvent;
 
 				this.component.removeEventListener('touchmove', this.ontouchmove, false);
 				this.component.removeEventListener('touchend',  this.ontouchend, false);
@@ -165,6 +206,8 @@ define([
 				} else {
 					if (this._edge) returnSpeed = 150;
 					translate(this.component._wrapper, -this.index*this.wh , returnSpeed);
+					touchEndEvent = new CustomEvent('touchcancel')
+					this.component.dispatchEvent(touchEndEvent);
 				}
 			}.bind(this);
 
@@ -185,9 +228,9 @@ define([
 			this._isScrolling = true;
 			setTimeout(function() {
 				self._isScrolling = false;
-			}, 200);
+			}, 300);
 
-			translate(this._wrapper, -wh*storeData.index, 400);
+			translate(this._wrapper, -wh*storeData.index, 600);
 		}
 
 		var resizeHandler = function() {
@@ -200,18 +243,21 @@ define([
 			}
 
 			if (this.clientHeight !== wh) {
-				this.style.height = window.innerHeight + 'px';
+				this.style.height = wh + 'px';
 			}
 			
 			translate(this._wrapper, -wh*storeData.index, 0);
 		}
 
 		var createdCallback = function() {
+			this._ctrl = false;
 			this._storeHandler  = storeHandler.bind(this);
 			this._resizeHandler = resizeHandler.bind(this);
 			this._touchHandler  = new TouchHandler(this);
 			this._wheelHandler  = new WheelHandler(this);
+			this._keyboardHandler  = new KeyboardHandler(this);
 		}
+
 		var attachedCallback = function() {
 			var slides = this.getElementsByClassName('js-slide');
 			this._wrapper = this.getElementsByClassName('slide-scroll-wrapper')[0];
@@ -231,12 +277,15 @@ define([
 			store.eventEmitter.subscribe(this._storeHandler);
 			this._touchHandler.set();
 			this._wheelHandler.set();
+			this._keyboardHandler.set();
 			window.addEventListener('resize', this._resizeHandler);
 		}
+
 		var detachedCallback = function() {
 			store.eventEmitter.unsubscribe(this._handleStore);
 			this._touchHandler.remove();
 			this._wheelHandler.remove();
+			this._keyboardHandler.remove();
 			window.removeEventListener('resize', this._resizeHandler);
 		}
 

@@ -4,14 +4,14 @@ define(['dispatcher'], function(dispatcher) {
 	// mostly for some ios safari wierdness
 
 	var elementProto = function() {
-		var _resizeHandler = function() {
+		var resizeHandler = function() {
 			var wh = window.innerHeight;
 			if (this.clientHeight === wh) return;
 			this.style.height = window.innerHeight + 'px';
 		}
 
 		var createdCallback = function() {
-			this._resizeHandler = _resizeHandler.bind(this);
+			this._resizeHandler = resizeHandler.bind(this);
 		}
 		var attachedCallback = function() {
 			this._resizeHandler();

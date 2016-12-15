@@ -82,7 +82,7 @@ define(['dispatcher'], function(dispatcher) {
 	}();
 
 
-	Object.setPrototypeOf(elementProto, HTMLDivElement.prototype);
+	Object.setPrototypeOf(elementProto, HTMLElement.prototype);
 	document.registerElement('preload-component', {
 		prototype: elementProto
 	});

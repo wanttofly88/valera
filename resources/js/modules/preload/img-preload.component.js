@@ -2,15 +2,15 @@ define(['dispatcher', 'resize/breakpoint.store'], function(dispatcher, breakpoin
 	"use strict";
 
 	var elementProto = function() {
-		var _handleLoadOnce = function() {
+		var handleLoadOnce = function() {
 			var event = new Event('loadonce');
 			this.dispatchEvent(event);
 			this.loadedOnce = true;
-			this.removeEventListener('load', _handleLoadOnce);
+			this.removeEventListener('load', this._handleLoadOnce);
 
 		}
 
-		var _handleBreakpoints = function() {
+		var handleBreakpoints = function() {
 			var windowBreakpoint = breakpointStore.getData().name;
 
 			if (this.breakpoint === windowBreakpoint) return;
@@ -21,13 +21,13 @@ define(['dispatcher', 'resize/breakpoint.store'], function(dispatcher, breakpoin
 			}
 
 			this.breakpoint = windowBreakpoint;
-			this.addEventListener('load', _handleLoadOnce);
+			this.addEventListener('load', this._handleLoadOnce);
 			this.src = this.sources[windowBreakpoint];
 		}
 
 		var createdCallback = function() {
-			_handleBreakpoints = _handleBreakpoints.bind(this);
-			_handleLoadOnce = _handleLoadOnce.bind(this);
+			this._handleBreakpoints = handleBreakpoints.bind(this);
+			this._handleLoadOnce = handleLoadOnce.bind(this);
 			this.breakpoint = null;
 			this.loadedOnce = false;
 		}
@@ -42,11 +42,11 @@ define(['dispatcher', 'resize/breakpoint.store'], function(dispatcher, breakpoin
 				mobile: srcMobile
 			}
 
-			_handleBreakpoints();
-			breakpointStore.eventEmitter.subscribe(_handleBreakpoints);
+			this._handleBreakpoints();
+			breakpointStore.eventEmitter.subscribe(this._handleBreakpoints);
 		}
 		var detachedCallback = function() {
-			breakpointStore.eventEmitter.unsubscribe(_handleBreakpoints);
+			breakpointStore.eventEmitter.unsubscribe(this._handleBreakpoints);
 		}
 
 

@@ -2,7 +2,7 @@ define(['dispatcher'], function(dispatcher) {
 	"use strict";
 
 	var elementProto = function() {
-		var _handleResize = function() {
+		var handleResize = function() {
 			var parentWidth = this.parentNode.clientWidth;
 
 			// yep. don't question me!
@@ -12,14 +12,14 @@ define(['dispatcher'], function(dispatcher) {
 		}
 
 		var createdCallback = function() {
-			_handleResize = _handleResize.bind(this);
+			this._handleResize = handleResize.bind(this);
 		}
 		var attachedCallback = function() {
-			_handleResize();
-			window.addEventListener('resize', _handleResize);
+			this._handleResize();
+			window.addEventListener('resize', this._handleResize);
 		}
 		var detachedCallback = function() {
-			window.removeEventListener('resize', _handleResize);
+			window.removeEventListener('resize', this._handleResize);
 		}
 
 
