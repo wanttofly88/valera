@@ -321,7 +321,7 @@ full-height {
 }
 .stage .name {
 	position: absolute;
-	top: calc(60px + 5%);
+	top: 7%;
 	line-height: 0.83;
 	font-family: 'KingBasil';
 	font-size: 120px;
@@ -345,22 +345,52 @@ full-height {
 } 
 .stage .name .svg-top {
 	position: absolute;
-	top: -25px;
+	top: 0;
 	left: -5px;
 	width: 160px;
 	height: 90px;
 }
 .stage .name .svg-bot {
 	position: absolute;
-	top: 27px;
-	left: -10px;
+	top: 0;
+	left: 149px;
 	width: 200px;
 	height: 95px;
 }
-@media screen and (min-width: 640px) {
+@media screen and (min-height: 320px) {
+	.stage .name {
+		top: calc(10px + 7%);
+	}
+	.stage .name .svg-top {
+		position: absolute;
+		top: -25px;
+		left: -5px;
+		width: 160px;
+		height: 90px;
+	}
+	.stage .name .svg-bot {
+		position: absolute;
+		top: 27px;
+		left: -10px;
+		width: 200px;
+		height: 95px;
+	}
+}
+@media screen and (min-height: 400px) {
+	.stage .name {
+		top: 20%;
+	}
+}
+@media screen and (min-height: 500px) {
 	.stage .name {
 		top: auto;
-		bottom: calc(450px + 7%);
+		bottom: calc(400px + 7%);
+	}
+}
+@media screen and (min-width: 640px) and (min-height: 500px) {
+	.stage .name {
+		top: auto;
+		bottom: calc(400px + 7%);
 	}
 	.stage .name .svg-top {
 		top: -25px;
@@ -376,7 +406,11 @@ full-height {
 		height: 95px;
 	}
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) and (min-height: 640px) {
+	.stage .name {
+		top: auto;
+		bottom: calc(450px + 7%);
+	}
 	.stage .name .svg-top {
 		top: -25px;
 		left: -5px;
@@ -427,11 +461,10 @@ full-height {
 	position: absolute;
 	right: -500px;
 	left: -500px;
-	height: calc(100% - 50px);
+	height: calc(100% + 20px);
 	margin: auto;
 	bottom: -50px;
 	z-index: 1;
-	opacity: 0.8;
 }
 .stage .photo img {
 	position: absolute;
@@ -441,6 +474,7 @@ full-height {
 	right: 0;
 	bottom: 0;
 	margin: auto;
+	transform: translateX(13%);
 }
 .stage .bg-blured {
 	position: absolute;
@@ -462,7 +496,9 @@ full-height {
 		left: auto;
 		right: -300px;
 		bottom: -150px;
-		opacity: 1;
+	}
+	.stage .photo img {
+		transform: translateX(0px);
 	}
 }
 @media screen and (min-width: 1000px) {
@@ -484,17 +520,23 @@ full-height {
 	background: url(../images/arrow.png);
 	display: none;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1350px) and (min-height: 500px) {
 	.stage .bg-arrow {
 		display: block;
 	}
 }
 .stage .scroll-button-wrapper {
+	display: none;
 	position: absolute;
 	width: 100%;
 	left: 0;
 	bottom: 21px;
 	z-index: 10;
+}
+@media screen and (min-width: 640px) and (min-height: 400px) {
+	.stage .scroll-button-wrapper {
+		display: block;
+	}
 }
 
 section {
@@ -593,10 +635,6 @@ slide-scroll {
 slide-scroll .slide-scroll-wrapper {
 	transition: all 0s;
 }
-/*slide-scroll .slide-scroll-wrapper {
-	-webkit-overflow-scrolling: touch;
-}
-*/
 section .wrapper {
 	height: 100%;
 	box-sizing: border-box;
@@ -607,26 +645,27 @@ section .wrapper {
 }
 .home .text {
 	position: absolute;
-	bottom: 80px;
+	bottom: 15px;
 	left: 0;
-	right: 0;
 	margin: auto;
 	width: 100%;
 	max-width: 330px;
 }
 .home .text .btn-wrap {
-	text-align: center;
+	text-align: left;
 }
-
-@media screen and (min-width: 640px) {
+.home p {
+	margin-bottom: 10px;
+}
+@media screen and (min-height: 400px) {
+	.home p {
+		margin-bottom: 30px;
+	}
 	.home .text {
-		right: auto;
-	}
-	.home .text .btn-wrap {
-		text-align: left;
+		bottom: 35px;	
 	}
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-height: 500px) {
 	.home .text {
 		bottom: 110px;
 	}
@@ -638,9 +677,8 @@ section .wrapper {
 }
 .about .text {
 	position: absolute;
-	bottom: 80px;
+	bottom: 35px;
 	left: 0;
-	right: 0;
 	margin: auto;
 	width: 100%;
 	max-width: 330px;
@@ -648,15 +686,18 @@ section .wrapper {
 .about .text .btn-wrap {
 	text-align: center;
 }
-@media screen and (min-width: 640px) {
-	.about .text {
-		right: auto;
+.about p {
+	margin-bottom: 10px;
+}
+@media screen and (min-height: 400px) {
+	.about p {
+		margin-bottom: 30px;
 	}
-	.about .text .btn-wrap {
-		text-align: left;
+	.about .text {
+		bottom: 35px;	
 	}
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-height: 500px) {
 	.about .text {
 		bottom: 110px;
 	}
