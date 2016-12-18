@@ -241,10 +241,6 @@ define([
 				console.warn('slide-scroll internall error');
 				return;
 			}
-
-			if (this.clientHeight !== wh) {
-				this.style.height = wh + 'px';
-			}
 			
 			translate(this._wrapper, -wh*storeData.index, 0);
 		}

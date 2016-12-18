@@ -293,7 +293,7 @@ header .side-nav {
 	}
 }
 
-full-height {
+.vh-height {
 	display: block;
 	height: 100vh;
 }
@@ -326,7 +326,7 @@ full-height {
 	font-family: 'KingBasil';
 	font-size: 120px;
 	color: #040406;
-	z-index: 3;
+	z-index: 5;
 }
 .stage .name svg {
 	position: absolute;
@@ -441,8 +441,6 @@ full-height {
 	height: 95px;
 }
 
-
-
 .stage full-text {
 	position: absolute;
 	left: -52px;
@@ -456,26 +454,48 @@ full-height {
 	color: #ffffff;
 }
 
+contain-resize {
+	display: block;
+	position: absolute;
+	max-width: 100%;
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+}
 
 .stage .photo {
 	position: absolute;
 	right: -500px;
-	left: -500px;
+	left: -350px;
 	height: calc(100% + 20px);
 	margin: auto;
 	bottom: -50px;
 	z-index: 1;
 }
-.stage .photo img {
+.stage .photo .top-photo {
 	position: absolute;
-	max-width: 100%;
-	max-height: 100%;
+	top: 0;
 	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: auto;
-	transform: translateX(13%);
+	width: 100%;
+	height: auto;
+	transform-origin: 74% 95%;
 }
+.stage .photo .bot-photo {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+/*.stage .photo .top-photo {
+	transform-origin: 72% 86%;
+	transform: rotate(30deg);
+}*/
 .stage .bg-blured {
 	position: absolute;
 	bottom: 25%;
@@ -497,9 +517,6 @@ full-height {
 		right: -300px;
 		bottom: -150px;
 	}
-	.stage .photo img {
-		transform: translateX(0px);
-	}
 }
 @media screen and (min-width: 1000px) {
 	.stage .photo {
@@ -511,20 +528,7 @@ full-height {
 
 }
 
-.stage .bg-arrow {
-	position: absolute;
-	bottom: calc(365px + 7%);
-	left: 375px;
-	width: 331px;
-	height: 38px;
-	background: url(../images/arrow.png);
-	display: none;
-}
-@media screen and (min-width: 1350px) and (min-height: 500px) {
-	.stage .bg-arrow {
-		display: block;
-	}
-}
+
 .stage .scroll-button-wrapper {
 	display: none;
 	position: absolute;
@@ -538,6 +542,62 @@ full-height {
 		display: block;
 	}
 }
+
+
+.stage .stage-screen {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 2;
+}
+
+.stage-about .arrow {
+	position: absolute;
+	bottom: calc(365px + 7%);
+	left: 375px;
+	width: 331px;
+	height: 38px;
+	background: url(../images/arrow.png);
+	display: none;
+}
+@media screen and (min-width: 1350px) and (min-height: 500px) {
+	.stage-about .arrow {
+		display: block;
+	}
+}
+.stage-interior .lamp {
+	position: absolute;
+	top: -13px;
+	left: 15.5%;
+	width: 307px;
+	height: 550px;
+	transform-origin: 50% -500px;
+	display: none;
+}
+.stage-interior .lamp-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url(../images/main/lamp.png);
+	transform: translateY(-550px);
+}
+@media screen and (min-width: 1200px) and (min-height: 640px) {
+	.stage-interior .lamp {
+		display: block;
+	}
+}
+
+
+
+
+
+
+
+
 
 section {
 	position: relative;
@@ -839,12 +899,12 @@ section .wrapper {
 
 
 
-.csstransitions .bg-arrow {
+.csstransitions .stage-about .arrow {
 	will-change: transform;
 	opacity: 0;
 	transform: translateX(-10px);
 }
-.csstransitions .load-complete-once .bg-arrow {
+.csstransitions .load-complete-once .stage-about .arrow {
 	will-change: auto;
 	transition:  all 0.1s linear 0.7s;
 	transform: translateX(0px);

@@ -22,16 +22,14 @@ define([
 				return;
 			}
 
-			if (this.clientHeight !== wh) {
-				this.style.height = wh + 'px';
-			}
-
 			translate(this._wrapper, -wh*storeData.index, 0);
 		}
 
 		var touchShiftHandler = function(e) {
 			var storeData = store.getData().items[this._id];
 			var wh = this.clientHeight;
+
+			if (!storeData) return;
 
 			translate(this._wrapper, -storeData.index*wh + e.detail/1.5 , 0);
 		}
@@ -40,12 +38,16 @@ define([
 			var storeData = store.getData().items[this._id];
 			var wh = this.clientHeight;
 
+			if (!storeData) return;
+
 			translate(this._wrapper, -storeData.index*wh , 150);
 		}
 
 		var storeHandler = function() {
 			var storeData = store.getData().items[this._id];
 			var wh = this.clientHeight;
+
+			if (!storeData) return;
 
 			translate(this._wrapper, -wh*storeData.index, 250);
 		}
