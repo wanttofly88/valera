@@ -12,10 +12,12 @@
 </head>
 <body>
 
+	<vh-fix></vh-fix>
+
 	<preload-component class="page-wrapper">
 		<header>
 			<div class="wrapper">
-				<full-height class="side-nav show1000">
+				<div class="side-nav vh-height show1000">
 					<nav is="main-nav" class="desktop-nav" data-id="main-slide-scroll">
 						<div class="item">
 							<a href="#about" class="link-wrap active">
@@ -42,20 +44,20 @@
 							<div>my contacts</div>
 						</div>
 					</nav>
-				</full-height>
+				</div>
 			</div>
 		</header>
 
-		<full-bg class="full-bg" data-id="main-slide-scroll">
+		<full-bg class="full-bg vh-height" data-id="main-slide-scroll">
 			<div class="full-bg-wrapper">
-				<full-height class="bg-item" style="background: #b9d4e8"></full-height>
-				<full-height class="bg-item" style="background: #bbe7c2"></full-height>
-				<full-height class="bg-item" style="background: #cdbee8"></full-height>
-				<full-height class="bg-item" style="background: #c3dce0"></full-height>
+				<div class="bg-item vh-height" style="background: #b9d4e8"></div>
+				<div class="bg-item vh-height" style="background: #bbe7c2"></div>
+				<div class="bg-item vh-height" style="background: #cdbee8"></div>
+				<div class="bg-item vh-height" style="background: #c3dce0"></div>
 			</div>
 		</full-bg>
 		
-		<full-height class="stage">
+		<stage-component class="stage vh-height">
 			<div class="wrapper">
 				<full-text>ARCHITECT</full-text>
 				<div class="name">
@@ -79,83 +81,106 @@
 
 				<div class="replaceable" data-id="stage-replaceable">
 					<div class="photo">
-						<img is="img-preload" class="top-photo"
-							data-desktop-src="resources/images/photo.png"
-							src=""
-							alt=""></img>
+						<contain-resize
+							data-width="1015"
+							data-height="1019">
+							<img is="img-preload" class="top-photo"
+								data-wait="true"
+								data-desktop-src="resources/images/main/photo-top.png"
+								src=""
+								alt=""/>
+							<img is="img-preload" class="bot-photo"
+								data-wait="true"
+								data-desktop-src="resources/images/main/photo-bot.png"
+								src=""
+								alt=""/>
+						</contain-resize>
 					</div>
 
-					<div class="bg-arrow"></div>
+					<div class="stage-screen stage-about">
+						<div class="arrow"></div>
+					</div>
+
+					<div class="stage-screen stage-interior">
+						<div class="lamp">
+							<div class="lamp-inner"></div>
+						</div>
+						<div class="birds">
+							<div class="bird bird-1"></div>
+							<div class="bird bird-2"></div>
+							<div class="bird bird-3"></div>
+						</div>
+					</div>
 
 					<div class="scroll-button-wrapper">
 						<div class="scroll-button">scroll</div>
 					</div>
 				</div>
 			</div>
-		</full-height>
+		</stage-component>
 
 		<main class="replaceable" data-id="main-replaceable">
-			<slide-scroll data-id="main-slide-scroll">
+			<slide-scroll class="vh-height" data-id="main-slide-scroll">
 				<div class="slide-scroll-wrapper">
 
-					<section class="home js-slide" id="#about">
+					<section class="home js-slide vh-height" id="#about">
 						<div class="bg"></div>
-						<full-height class="wrapper">
+						<div class="wrapper">
 							<div class="text">
 								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
 								<div class="btn-wrap">
 									<a href="#" class="button">Read more</a>
 								</div>
 							</div>
-						</full-height>
+						</div>
 					</section>
 
-					<section class="about js-slide" id="#interior">
+					<section class="about js-slide vh-height" id="#interior">
 						<div class="bg">
 							<div class="wrapper">
 								<div class="bg-arrow"></div>
 							</div>
 						</div>
-						<full-height class="wrapper">
+						<div class="wrapper">
 							<div class="text">
 								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
 								<div class="btn-wrap">
 									<a href="#" class="button">Read more</a>
 								</div>
 							</div>
-						</full-height>
+						</div>
 					</section>
 
-					<section class="about js-slide" id="#concept">
+					<section class="about js-slide vh-height" id="#concept">
 						<div class="bg">
 							<div class="wrapper">
 								<div class="bg-arrow"></div>
 							</div>
 						</div>
-						<full-height class="wrapper">
+						<div class="wrapper">
 							<div class="text">
 								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
 								<div class="btn-wrap">
 									<a href="#" class="button">Read more</a>
 								</div>
 							</div>
-						</full-height>
+						</div>
 					</section>
 
-					<section class="about js-slide" id="#contacts">
+					<section class="about js-slide vh-height" id="#contacts">
 						<div class="bg">
 							<div class="wrapper">
 								<div class="bg-arrow"></div>
 							</div>
 						</div>
-						<full-height class="wrapper">
+						<div class="wrapper">
 							<div class="text">
 								<p>We are an independent digital design studio based in London who bring creativity and intelligence to the world’s most beloved brands.</p>
 								<div class="btn-wrap">
 									<a href="#" class="button">Read more</a>
 								</div>
 							</div>
-						</full-height>
+						</div>
 					</section>
 
 				</div>

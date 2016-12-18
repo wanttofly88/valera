@@ -14,6 +14,7 @@ require.config({
 	baseUrl: path + 'js/modules',
 	paths: {
 		bezier: '../libs/bezier-easing',
+		TweenMax: '../libs/TweenMax',
 	},
 	shim: {
 		bezier: {
@@ -24,11 +25,13 @@ require.config({
 
 
 require([
-	'resize/full-height.component',
+	'resize/vh-fix.component',
+	'resize/contain-resize.component',
 	'preload/preload.component',
 	'preload/img-preload.component',
 	'full-text/full-text.component',
 	'slide-scroll/slide-scroll.component',
 	'full-bg/full-bg.component',
-	'main-nav/main-nav.component'
+	'main-nav/main-nav.component',
+	'stage/stage.component'
 ]);

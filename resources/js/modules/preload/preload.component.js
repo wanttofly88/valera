@@ -49,8 +49,8 @@ define(['dispatcher'], function(dispatcher) {
 
 			this.startTime = Date.now();
 
-			plImages = document.querySelectorAll('img[is="img-preload"]');
-			plVideos = document.querySelectorAll('video[is="video-preload"]');
+			plImages = document.querySelectorAll('img[is="img-preload"][data-wait="true"]');
+			plVideos = document.querySelectorAll('video[is="video-preload"][data-wait="true"]');
 			totalElementsToWait = plImages.length + plVideos.length;
 
 			if (totalElementsToWait === 0) this._handleLoad();
