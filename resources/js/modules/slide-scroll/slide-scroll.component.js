@@ -61,40 +61,53 @@ define([
 		var WheelHandler = function(component) {
 			this.component = component;
 			this._time = null;
-			this._scrollBuffer = [];
+
+			this._resetBuffer = function() {
+				this._scrollBuffer = [];
+				for (var i = 0; i < 40; i++) {
+					this._scrollBuffer.push(0);
+				}
+			}
+
+			this._resetBuffer();
 
 			this.onWheel = function(e) {
 				var value = e.wheelDelta || -e.deltaY || -e.detail;
 				var direction = value > 0 ? 'top' : 'bottom';
 				var previousTime;
 				var summ1, summ2;
+				var bufferOld, bufferNew;
 
-				if (this.component._isScrolling) return;
 				if (this.component._ctrl) return;
 
 				if (Math.abs(e.wheelDeltaX) > Math.abs(e.wheelDelta) || Math.abs(e.deltaX ) > Math.abs(e.deltaY)) return;
-
-				if (this._scrollBuffer.length > 50) {
-					this._scrollBuffer.shift();
-				}
 
 				previousTime = this._time;
 				this._time = new Date().getTime();
 
 				if (previousTime && this._time - previousTime > 200) {
-					this._scrollBuffer = [];
+					this._resetBuffer();
 				}
 
 				this._scrollBuffer.push(Math.abs(value));
+				this._scrollBuffer.shift();
 
-				summ1 = this._scrollBuffer.reduceRight(function(previousValue, currentValue, index, array) {
-					return index < array.length - 10 ? previousValue : previousValue + currentValue;
+				if (this.component._isScrolling) return;
+
+				bufferNew = this._scrollBuffer.slice(20, 40);
+				bufferOld = this._scrollBuffer.slice(0, 20);
+
+				summ1 = bufferNew.reduce(function(previousValue, currentValue) {
+					return previousValue + currentValue;
 				});
-				summ2 = this._scrollBuffer.reduceRight(function(previousValue, currentValue, index, array) {
-					return index < array.length - 50 ? previousValue : previousValue + currentValue;
+				summ2 = bufferOld.reduce(function(previousValue, currentValue) {
+					return previousValue + currentValue;
 				});
 
-				if (summ1 >= summ2) {
+				summ1 = summ1/20;
+				summ2 = summ2/20;
+
+				if (summ1*0.7 >= summ2) {
 					dispatcher.dispatch({
 						type: 'slide-scroll',
 						id: this.component._id,
