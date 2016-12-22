@@ -33,5 +33,6 @@ require([
 	'slide-scroll/slide-scroll.component',
 	'full-bg/full-bg.component',
 	'main-nav/main-nav.component',
-	'stage/stage.component'
+	'stage/stage.component',
+	'stage/birds.component'
 ]);
